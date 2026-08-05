@@ -1,97 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simeon Adekoya | Web Developer</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator</title>
+
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: #0b1f3a;
+      font-family: Arial, sans-serif;
+    }
+
+    .calculator {
+      width: 300px;
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+    }
+
+    #display {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 18px;
+      margin-bottom: 15px;
+      text-align: right;
+      font-size: 28px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    button {
+      padding: 18px;
+      border: none;
+      border-radius: 8px;
+      background: #0077ff;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .equal {
+      background: #0b1f3a;
+    }
+  </style>
 </head>
+
 <body>
+  <div class="calculator">
+    <input id="display" type="text" readonly>
 
-<header>
-    <nav>
-        <h2>Simeon Adekoya</h2>
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
-    </nav>
-</header>
+    <div class="buttons">
+      <button onclick="clearDisplay()">C</button>
+      <button onclick="addToDisplay('/')">÷</button>
+      <button onclick="addToDisplay('*')">×</button>
+      <button onclick="deleteLast()">⌫</button>
 
-<section id="home" class="hero">
-    <img src="./IMG-20260603-WA0009.jpg" alt="Simeon Adekoya">
-    <h1>Hi, I'm Simeon Adekoya</h1>
-    <h2>Web Developer in Training</h2>
-    <p>I am passionate about learning web development. I build modern, responsive websites using HTML, CSS and JavaScript.</p>
-    <a class="button" href="#projects">View My Projects</a>
-</section>
+      <button onclick="addToDisplay('7')">7</button>
+      <button onclick="addToDisplay('8')">8</button>
+      <button onclick="addToDisplay('9')">9</button>
+      <button onclick="addToDisplay('-')">−</button>
 
-<section id="about">
-    <h2>About Me</h2>
-    <p>Hello! My name is Simeon Adekoya. I am an aspiring front-end web developer who enjoys creating clean, responsive and user-friendly websites.</p>
-</section>
+      <button onclick="addToDisplay('4')">4</button>
+      <button onclick="addToDisplay('5')">5</button>
+      <button onclick="addToDisplay('6')">6</button>
+      <button onclick="addToDisplay('+')">+</button>
 
-<section id="skills">
-    <h2>My Skills</h2>
-    <div class="skills">
-        <div>HTML5</div>
-        <div>CSS3</div>
-        <div>JavaScript</div>
+      <button onclick="addToDisplay('1')">1</button>
+      <button onclick="addToDisplay('2')">2</button>
+      <button onclick="addToDisplay('3')">3</button>
+      <button class="equal" onclick="calculate()">=</button>
+
+      <button onclick="addToDisplay('0')">0</button>
+      <button onclick="addToDisplay('.')">.</button>
     </div>
-</section>
+  </div>
 
-<section id="projects">
-    <h2>My Projects</h2>
+  <script>
+    const display = document.getElementById("display");
 
-    <div class="projects">
-        <div class="project-card">
-            <h3>Portfolio Website</h3>
-            <p>A personal portfolio website designed with HTML and CSS.</p>
-        </div>
+    function addToDisplay(value) {
+      display.value += value;
+    }
 
-        <div class="project-card">
-            <h3>Colour Changer</h3>
-            <p>A JavaScript project that changes the background colour when a button is clicked.</p>
-            <a href="https://simeonboy12.github.io/colour-changer/" target="_blank" rel="noopener" style="color: white; font-weight: bold;">View Project</a>
-        </div>
+    function clearDisplay() {
+      display.value = "";
+    }
 
-        <div class="project-card">
-            <h3>Digital Clock</h3>
-            <p>A JavaScript digital clock that shows the current time.</p>
-            <a href="https://simeonboy12.github.io/digital-clock/" target="_blank" rel="noopener" style="color: white; font-weight: bold;">View Project</a>
-        </div>
+    function deleteLast() {
+      display.value = display.value.slice(0, -1);
+    }
 
-        <div class="project-card">
-            <h3>Calculator</h3>
-            <p>A simple calculator built with HTML, CSS and JavaScript.</p>
-            <a href="https://simeonboy12.github.io/calculator/" target="_blank" rel="noopener" style="color: white; font-weight: bold;">View Project</a>
-        </div>
-    </div>
-</section>
-
-<section id="contact">
-    <h2>Contact Me</h2>
-    <p>I'd love to hear from you. Feel free to get in touch.</p>
-
-    <form>
-        <input type="text" placeholder="Your Name" required>
-        <input type="email" placeholder="Your Email" required>
-        <textarea placeholder="Your Message" rows="5" required></textarea>
-        <button type="submit">Send Message</button>
-    </form>
-</section>
-
-<footer>
-    <p>© 2026 Simeon Adekoya. All rights reserved.</p>
-    <p>Built with HTML, CSS and JavaScript.</p>
-    <p>
-        <a href="https://github.com/simeonboy12" target="_blank" rel="noopener">GitHub</a>
-        |
-        <a href="#">LinkedIn (Coming Soon)</a>
-    </p>
-</footer>
-
-<script src="script.js"></script>
+    function calculate() {
+      try {
+        display.value = Function("return " + display.value)();
+      } catch {
+        display.value = "Error";
+      }
+    }
+  </script>
 </body>
 </html>
